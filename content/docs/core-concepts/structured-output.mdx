@@ -1,0 +1,34 @@
+## What this is
+
+Structured output means you tell the assistant, “Answer in this shape.” Not “vaguely similar,” but actually predictable.
+
+Why you might care:
+
+- you want to put answers into a spreadsheet
+- you want an app to read the result without guessing
+- you want the assistant to extract fields from messy text
+
+<Callout kind="tip" title="Think: forms, not essays">
+When you need reliability, ask for a form to be filled out. Essays are beautiful, but forms are dependable.
+</Callout>
+
+## The form-filling mindset
+
+Instead of: “Summarize this contract.”
+
+Try: “Extract these fields: parties, start date, end date, renewal terms, cancellation notice period.”
+
+Then you can check each field and decide what to do next.
+
+## Common mistakes
+
+- **Too many fields at once**: start small; add fields only when you trust the pattern.
+- **Ambiguous fields**: define what counts. Example: “start date = date service begins, not signature date.”
+- **No validation**: add simple rules like “if unknown, return null, do not guess.”
+
+<details>
+  <summary>Builder notes (optional)</summary>
+
+Structured output pairs well with tool use. Example: extract an order ID, then call a tool to look it up. Keep a log of what fields were extracted and where they came from.
+</details>
+

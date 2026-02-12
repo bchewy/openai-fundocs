@@ -1,0 +1,12 @@
+## What this is
+
+Local shell is a legacy pattern for running commands on a local machine.
+
+## Why it is “legacy”
+
+It is harder to secure and audit local execution than a controlled sandbox. Most teams should use a modern shell tool setup with strict policies.
+
+<Callout kind="warn" title="If you must do this">
+Use a dedicated machine, strict allowlists, and log everything. Never run with access to secrets you cannot rotate.
+</Callout>
+

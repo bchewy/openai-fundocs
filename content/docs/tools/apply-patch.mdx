@@ -1,0 +1,20 @@
+## What this is
+
+Apply patch is the mechanic. Instead of “edit this file however,” it makes edits in a structured diff format.
+
+Why that matters:
+
+- you can review changes
+- you can apply changes safely
+- you can reject partial or risky edits
+
+<Callout kind="tip" title="Prefer structured edits for production repos">
+It is easier to audit a patch than a paragraph describing a patch.
+</Callout>
+
+## Guardrails that help
+
+- require tests to pass after changes
+- block edits to secrets and config folders by default
+- cap the size of changes in one step
+

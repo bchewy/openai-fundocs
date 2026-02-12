@@ -1,0 +1,19 @@
+## What this is
+
+Connectors and MCP servers are adapters. They let your assistant talk to other systems without you rewriting everything from scratch.
+
+In human terms:
+
+- **Connector**: a pre-made adapter
+- **MCP server**: a “tool shelf” that exposes actions and data
+
+<Callout kind="warn" title="Treat every connector like a new employee">
+It needs permissions. It needs auditing. It needs a clear scope. Otherwise it will accidentally do something expensive or unsafe.
+</Callout>
+
+## Good defaults
+
+- least privilege (read-only first)
+- explicit approvals for “write” actions
+- logs for every call, with sensitive data redaction
+

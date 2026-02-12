@@ -1,0 +1,29 @@
+## What this is
+
+Safety in building agents means: the agent is useful without becoming reckless.
+
+Your agent should never feel like a black box with your production systems attached.
+
+## The three seatbelts
+
+1. **Scope**: what the agent is allowed to do (and not do).
+2. **Approval**: which actions require a human “yes.”
+3. **Audit**: logs that let you answer: “what happened and why?”
+
+<Callout kind="warn" title="If you can’t explain it, don’t automate it">
+If a process is too complex to explain to a new teammate, it is too complex to hand to an agent without a lot of guardrails.
+</Callout>
+
+## Good defaults
+
+- default to read-only tools
+- default to small budgets (time, tokens, cost)
+- default to “ask when unsure”
+- default to storing traces with redaction
+
+<details>
+  <summary>Builder notes (optional)</summary>
+
+Model outputs are not permission checks. Treat approvals and allowlists as code, not text. Enforce them outside the model.
+</details>
+

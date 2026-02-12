@@ -1,0 +1,27 @@
+## What this is
+
+Actions are the “do something” buttons your agent can trigger.
+
+Instead of the agent saying, “You could do X,” it can offer:
+
+- “Create ticket”
+- “Request approval”
+- “Open the right dashboard”
+
+<Callout kind="warn" title="Actions must be safe by design">
+An action should be reversible or gated. If it can’t be reversed, it requires approval and logging.
+</Callout>
+
+## A good action has
+
+- a clear name
+- clear inputs
+- clear success/failure messages
+- a human visible trail
+
+<details>
+  <summary>Builder notes (optional)</summary>
+
+Actions are tools. Validate inputs, enforce permissions in code, and treat model output as untrusted.
+</details>
+

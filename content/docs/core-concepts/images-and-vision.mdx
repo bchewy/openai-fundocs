@@ -1,0 +1,33 @@
+## What this is
+
+“Images and vision” covers two superpowers:
+
+- **Making images**: you describe what you want, the model generates it.
+- **Understanding images**: you show an image, the model explains what it sees.
+
+## The trick: be specific
+
+If you say “make it modern,” the assistant has to guess what “modern” means to you.
+
+Instead:
+
+- specify the subject
+- specify the vibe
+- specify the constraints (size, background, style boundaries)
+
+<Callout kind="warn" title="Watch out: sensitive images">
+Decide what kinds of images are allowed, where they can be stored, and who can view them. Treat image inputs like user data.
+</Callout>
+
+## Helpful patterns
+
+- **Describe then refine**: generate a draft, then ask for focused changes (“make the lighting warmer”, “remove the text”).
+- **Ask what you care about**: “Is there a stop sign in this photo?” is better than “Describe the image.”
+- **Add a checklist**: “If you are unsure, say so.”
+
+<details>
+  <summary>Builder notes (optional)</summary>
+
+The Tools section has “Image generation” (tool) and “Computer use” (screenshot loops). For safety, add size limits, content filters, and storage rules.
+</details>
+

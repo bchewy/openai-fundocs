@@ -1,0 +1,36 @@
+## What this is
+
+Text generation is the “talking” part: you write a request, and the assistant writes back.
+
+In real life, this powers things like:
+
+- customer support drafts
+- meeting notes
+- policy summaries
+- translating “legal-ish” into “human”
+
+<Callout kind="myth" title="Myth: You need perfect prompts">
+You do not need a secret spell. You need two things: context and a clear finish line.
+</Callout>
+
+## A simple recipe
+
+1. **Context**: what is happening and what matters?
+2. **Task**: what do you want the assistant to produce?
+3. **Rules**: what is not allowed (tone, length, format, sensitive content)?
+4. **Check**: ask it to show its work when it matters (sources, assumptions, uncertainty).
+
+<PromptSandwich />
+
+## When it goes wrong (and how to prevent it)
+
+- **It sounds confident but is wrong**: ask it to list assumptions and what it is unsure about.
+- **It is too long**: give a strict format and a word limit.
+- **It is too generic**: add your audience and one example you like.
+
+<details>
+  <summary>Builder notes (optional)</summary>
+
+If you do build with this, your code will send input, receive output, and store the conversation state. The “Responses API” page explains how to keep multi-step interactions tidy.
+</details>
+

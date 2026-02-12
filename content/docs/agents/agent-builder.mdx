@@ -1,0 +1,31 @@
+## What this is
+
+Agent Builder is for designing an agent without starting from a blank page.
+
+You build something closer to a flowchart:
+
+- what the agent is trying to do
+- what information it can use
+- what tools it is allowed to touch
+- when it should ask a human
+
+## A good first build
+
+Start with a tiny agent:
+
+- one job
+- one data source
+- one or two tools
+
+Then test it with real user questions. Expand only after you have receipts.
+
+<Callout kind="warn" title="Guardrails are part of the build">
+If you add an action that can change customer data, you also add approvals and logging. That is not optional.
+</Callout>
+
+<details>
+  <summary>Builder notes (optional)</summary>
+
+Even if you design in a UI, you still need to think like an engineer: permissions, auditing, and failure modes.
+</details>
+

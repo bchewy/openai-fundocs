@@ -1,0 +1,29 @@
+## What this is
+
+The Agents SDK is for teams who want to run agents inside their own product:
+
+- you host the app
+- the agent uses the tools you provide
+- you keep a trace of tool calls and outputs
+
+## When you need it
+
+- you want your agent to live in your workflow
+- you want to integrate with your database and permissions
+- you want reliable observability (traces, evals, grading)
+
+<Callout kind="note" title="Design principle">
+The model should be a decision-maker, not an execution engine. Put execution behind tools with validation.
+</Callout>
+
+<details>
+  <summary>Builder notes (optional)</summary>
+
+At minimum, your agent runtime needs:
+
+- a tool registry (what actions exist)
+- an approval strategy (what requires human confirmation)
+- a trace store (what happened)
+- a retry story (what to do when tools fail)
+</details>
+

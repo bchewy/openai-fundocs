@@ -1,0 +1,28 @@
+## What this is
+
+Agents are usually built from “nodes.” A node is a step in the plan.
+
+If you like metaphors:
+
+- nodes are Lego pieces
+- the agent is the Lego set
+- tools are the special parts that can move in real life
+
+## Common node types (in human terms)
+
+- **Input**: what the user said, plus context you provide
+- **Think**: the agent decides what to do next
+- **Tool**: the agent asks your system to do a thing
+- **Check**: verify it worked; handle errors
+- **Output**: what you show to the user
+
+<Callout kind="tip" title="Put a “check” node near anything expensive">
+If it costs money, changes data, or triggers emails, add an explicit check and approval gate.
+</Callout>
+
+<details>
+  <summary>Builder notes (optional)</summary>
+
+The exact node list depends on your agent framework, but the patterns are consistent: plan, act, observe, repeat. Always store a trace.
+</details>
+

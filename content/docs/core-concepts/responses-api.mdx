@@ -1,0 +1,36 @@
+## What this is
+
+The Responses API is the “new control panel” for conversations that:
+
+- have multiple steps
+- may use tools
+- may include images or audio
+- need a clean record of what happened
+
+If your project feels like a game of “keep track of every message forever,” this is the upgrade.
+
+## Why it matters (non-technical version)
+
+Imagine your assistant is doing a task, like:
+
+1. read the customer question
+2. search your docs
+3. draft an answer
+4. cite where the answer came from
+
+The Responses API is the place where that whole mini-workflow lives.
+
+<Callout kind="warn" title="Watch out: state and memory">
+State is powerful. It also means you need to be intentional about retention, privacy, and what data is allowed to stick around.
+</Callout>
+
+<details>
+  <summary>Builder notes (optional)</summary>
+
+If you are migrating from older APIs, focus on these ideas:
+
+- treat each interaction as a “response” with a trace of events
+- keep tool calls and tool outputs as first-class parts of the record
+- decide what you store and for how long
+</details>
+

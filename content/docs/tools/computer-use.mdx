@@ -1,0 +1,20 @@
+## What this is
+
+Computer use is “remote hands.” The model proposes UI actions (click, type, scroll) and your system executes them and returns screenshots.
+
+It is useful when:
+
+- there is no API
+- the fastest path is “use the website”
+
+<Callout kind="warn" title="The guardrails matter more here">
+UI automation can click the wrong thing. Use allowlists, sandboxes, and human approval for sensitive actions.
+</Callout>
+
+## A safe loop
+
+1. model proposes an action
+2. your system checks whether it is allowed
+3. it executes and returns a screenshot
+4. the model confirms what happened
+

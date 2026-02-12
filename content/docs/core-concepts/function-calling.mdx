@@ -1,0 +1,33 @@
+## What this is
+
+Function calling is how an assistant stops being “just chat” and becomes “chat that can do things.”
+
+In plain terms:
+
+- you define a menu of actions your software can perform
+- the model can pick an action and provide the inputs
+- your system runs it, then tells the model what happened
+
+<Callout kind="note" title="You are still in charge">
+The model suggests an action. Your system decides whether it is allowed and actually runs it.
+</Callout>
+
+## Examples in everyday language
+
+- “Look up the user’s latest invoice.”
+- “Create a support ticket with this summary.”
+- “Check today’s shipping status for order 18372.”
+
+## Safety rules that actually work
+
+- **Allowlist**: only expose actions you are comfortable with.
+- **Ask-first mode**: require approval for expensive or irreversible actions.
+- **Log everything**: who asked, what was attempted, what ran, what came back.
+- **Fail safe**: if the tool fails, do not pretend it succeeded.
+
+<details>
+  <summary>Builder notes (optional)</summary>
+
+This pairs with the Tools section (Shell, Web search, File search, Computer use). Keep your tool schemas strict, and validate inputs before executing.
+</details>
+

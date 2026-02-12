@@ -1,0 +1,29 @@
+## What this is
+
+Trace grading is evaluating the *process*, not just the final answer.
+
+If an agent:
+
+- searched the wrong docs
+- used the wrong tool
+- skipped an approval step
+
+…you want to catch that even if the final sentence sounds fine.
+
+## What you can grade
+
+- Did it use the right tools?
+- Did it cite sources when required?
+- Did it ask for approval before risky actions?
+- Did it handle tool failures honestly?
+
+<Callout kind="note" title="Why this matters">
+Many agent failures are “the answer looks okay, but the process was unsafe.” Traces make this visible.
+</Callout>
+
+<details>
+  <summary>Builder notes (optional)</summary>
+
+Keep traces structured: tool calls, tool outputs, approvals, and model messages. Then you can grade each step and see exactly where it went wrong.
+</details>
+

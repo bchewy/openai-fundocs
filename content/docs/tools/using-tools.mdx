@@ -1,0 +1,26 @@
+## What this is
+
+This page explains the “tool loop” in plain language:
+
+1. the model sees a question
+2. it decides it needs a tool
+3. it asks for a tool call with specific inputs
+4. your system runs the tool (or blocks it)
+5. the model uses the tool’s output to continue
+
+## Three decisions you own
+
+- **Which tools exist** (allowlist)
+- **Which tool calls are approved** (gates)
+- **What gets logged** (audit trail)
+
+<Callout kind="warn" title="Tool output is part of the truth">
+If a tool fails, returns nothing, or returns partial data, your agent should say so. “Pretend success” is how incidents happen.
+</Callout>
+
+<details>
+  <summary>Builder notes (optional)</summary>
+
+Implement input validation. Treat tool call arguments as untrusted input. Add rate limits and timeouts.
+</details>
+

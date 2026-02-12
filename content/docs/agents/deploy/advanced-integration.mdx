@@ -1,0 +1,28 @@
+## What this is
+
+Advanced integration is when “just embed a chat UI” is not enough.
+
+Examples:
+
+- your agent must respect complex permissions
+- your workflows require multiple systems (CRM + ticketing + internal wiki)
+- you need a custom approval process
+
+## The non-technical questions to answer first
+
+- What data can the agent see?
+- What actions can it take?
+- What requires approval?
+- What should be logged and who can view the logs?
+- What happens when a tool fails?
+
+<Callout kind="note" title="Start with the boring diagram">
+Draw the data flow and the approval flow before you build. It saves weeks.
+</Callout>
+
+<details>
+  <summary>Builder notes (optional)</summary>
+
+This is where you’ll care about auth, audit logs, rate limits, and safe retries.
+</details>
+

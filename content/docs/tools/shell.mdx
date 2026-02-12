@@ -1,0 +1,22 @@
+## What this is
+
+Shell is the workshop. It lets the assistant run real commands and read the output.
+
+Good uses:
+
+- run tests
+- format code
+- inspect files
+- reproduce a bug
+
+<Callout kind="warn" title="Shell access is powerful">
+If you give shell access, you also give the ability to delete data, leak secrets, or run expensive workloads. Use sandboxes and approvals.
+</Callout>
+
+## Recommended guardrails
+
+- run in a sandbox container
+- block destructive commands by default
+- limit network access when possible
+- log commands and outputs
+
