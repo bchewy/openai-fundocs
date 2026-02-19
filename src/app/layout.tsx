@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
-import {
-  Fraunces,
-  Instrument_Sans,
-  JetBrains_Mono,
-} from "next/font/google";
+import { Syne, Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const display = Fraunces({
+const display = Syne({
   variable: "--font-display",
   subsets: ["latin"],
 });
 
-const body = Instrument_Sans({
+const body = Manrope({
   variable: "--font-body",
   subsets: ["latin"],
 });
@@ -28,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | Fundocs",
   },
   description:
-    "The OpenAI platform, explained like you’re smart but busy. Friendly guides for Core concepts, Agents, and Tools.",
+    "The OpenAI platform, explained like you're smart but busy. Friendly guides for Core concepts, Agents, and Tools.",
 };
 
 export default function RootLayout({

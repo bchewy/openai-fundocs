@@ -8,16 +8,15 @@ function sectionAccent(key: string) {
     case "core-concepts":
       return "var(--accent2)";
     case "agents":
-      return "var(--accent)";
+      return "var(--accent4)";
     case "tools":
       return "var(--accent3)";
     default:
-      return "var(--accent4)";
+      return "var(--accent)";
   }
 }
 
 export async function generateStaticParams() {
-  // Optional optimization: in dev it doesn’t matter; in prod this prebuilds pages.
   return DOC_PAGES.map((p) => ({ slug: p.slug.split("/") }));
 }
 
@@ -48,39 +47,39 @@ export default async function DocPage({
           aria-label="Breadcrumb"
           className="flex flex-wrap items-center gap-2 text-sm text-[color:var(--muted)]"
         >
-          <Link href="/docs" className="underline underline-offset-4">
+          <Link href="/docs" className="transition-colors hover:text-[color:var(--ink)]">
             Docs
           </Link>
-          <span aria-hidden="true">/</span>
+          <span aria-hidden="true" className="opacity-40">/</span>
           <Link
             href={`/docs/${page.section}`}
-            className="underline underline-offset-4"
+            className="transition-colors hover:text-[color:var(--ink)]"
           >
             {section?.title ?? page.section}
           </Link>
           {page.group ? (
             <>
-              <span aria-hidden="true">/</span>
+              <span aria-hidden="true" className="opacity-40">/</span>
               <span>{page.group}</span>
             </>
           ) : null}
         </nav>
 
         <div className="mt-4 flex flex-wrap items-center gap-2">
-          <span className="inline-flex items-center gap-2 rounded-full border-2 border-[color:var(--stroke)] bg-white/70 px-3 py-1 text-xs font-bold text-[color:var(--ink)]">
+          <span className="inline-flex items-center gap-2 rounded-md border border-[color:var(--stroke-soft)] bg-[color:var(--card)] px-2.5 py-1 text-xs font-semibold text-[color:var(--ink)]">
             <span
-              className="h-2 w-2 rounded-full border border-[color:var(--stroke)]"
+              className="h-1.5 w-1.5 rounded-full"
               style={{ background: accent }}
               aria-hidden="true"
             />
             {section?.title ?? page.section}
           </span>
-          <span className="inline-flex items-center gap-2 rounded-full border-2 border-[color:var(--stroke)] bg-white/70 px-3 py-1 text-xs font-bold text-[color:var(--muted)]">
-            Stop {Math.max(idx, 0) + 1} of {sectionPages.length}
+          <span className="inline-flex items-center rounded-md border border-[color:var(--stroke-soft)] bg-[color:var(--card)] px-2.5 py-1 text-xs font-medium text-[color:var(--muted)]">
+            {Math.max(idx, 0) + 1} / {sectionPages.length}
           </span>
         </div>
 
-        <h1 className="mt-3 font-display text-4xl tracking-tight">
+        <h1 className="mt-4 font-display text-3xl font-bold tracking-tight text-[color:var(--ink-strong)]">
           {page.title}
         </h1>
         <p className="mt-3 max-w-3xl text-[color:var(--muted)]">
@@ -88,26 +87,26 @@ export default async function DocPage({
         </p>
       </div>
 
-      <div className="mt-6 sticker-soft p-7">
+      <div className="mt-5 sticker-soft p-7">
         <div className="mdx">{mdx.content}</div>
       </div>
 
       <nav
         aria-label="Page navigation"
-        className="mt-6 grid gap-4 md:grid-cols-2"
+        className="mt-5 grid gap-3 md:grid-cols-2"
       >
         {prev ? (
           <Link
             href={`/docs/${prev.slug}`}
             className="sticker-pop sticker-soft block p-5"
           >
-            <p className="text-xs font-bold uppercase tracking-wide text-[color:var(--muted)]">
-              Previous stop
+            <p className="text-[11px] font-bold uppercase tracking-wider text-[color:var(--muted)]">
+              Previous
             </p>
-            <p className="mt-1 font-display text-xl tracking-tight">
+            <p className="mt-1.5 font-display text-lg font-bold tracking-tight text-[color:var(--ink-strong)]">
               {prev.title}
             </p>
-            <p className="mt-2 text-sm text-[color:var(--muted)]">
+            <p className="mt-1 text-sm text-[color:var(--muted)]">
               {prev.description}
             </p>
           </Link>
@@ -120,13 +119,13 @@ export default async function DocPage({
             href={`/docs/${next.slug}`}
             className="sticker-pop sticker-soft block p-5"
           >
-            <p className="text-xs font-bold uppercase tracking-wide text-[color:var(--muted)]">
-              Next stop
+            <p className="text-[11px] font-bold uppercase tracking-wider text-[color:var(--muted)]">
+              Next
             </p>
-            <p className="mt-1 font-display text-xl tracking-tight">
+            <p className="mt-1.5 font-display text-lg font-bold tracking-tight text-[color:var(--ink-strong)]">
               {next.title}
             </p>
-            <p className="mt-2 text-sm text-[color:var(--muted)]">
+            <p className="mt-1 text-sm text-[color:var(--muted)]">
               {next.description}
             </p>
           </Link>

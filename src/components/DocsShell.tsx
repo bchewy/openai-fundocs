@@ -12,7 +12,7 @@ function sectionColor(key: DocSection["key"]) {
     case "core-concepts":
       return "var(--accent2)";
     case "agents":
-      return "var(--accent)";
+      return "var(--accent4)";
     case "tools":
       return "var(--accent3)";
   }
@@ -23,9 +23,9 @@ function sectionChipColor(key: DocSection["key"]) {
     case "core-concepts":
       return "var(--accent2)";
     case "agents":
-      return "var(--accent)";
-    case "tools":
       return "var(--accent4)";
+    case "tools":
+      return "var(--accent3)";
   }
 }
 
@@ -71,13 +71,11 @@ export function DocsShell({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (!mobileOpen) return;
-    // Focus the close button for keyboard users.
     mobileCloseRef.current?.focus();
   }, [mobileOpen]);
 
   useEffect(() => {
     if (!searchOpen) return;
-    // Focus the search input reliably (autoFocus can be flaky in modals).
     setTimeout(() => searchInputRef.current?.focus(), 0);
   }, [searchOpen]);
 
@@ -93,7 +91,6 @@ export function DocsShell({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (mobileOpen || searchOpen) return;
-    // Restore focus to whatever opened the drawer/modal.
     lastFocusRef.current?.focus?.();
   }, [mobileOpen, searchOpen]);
 
@@ -156,81 +153,92 @@ export function DocsShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen">
-      <a href="#main-content" className="skip-link sticker-soft px-4 py-2 text-sm font-bold">
+      <a href="#main-content" className="skip-link sticker-soft px-4 py-2 text-sm font-semibold">
         Skip to content
       </a>
 
+      {/* ── Header ── */}
       <header className="sticky top-0 z-40">
         <div className="mx-auto max-w-6xl px-4 pb-3 pt-4 sm:px-6">
-          <div className="sticker-soft flex items-center gap-3 px-4 py-3 backdrop-blur">
-          <button
-            type="button"
-            className="sticker-pop inline-flex h-10 w-10 items-center justify-center rounded-2xl border-2 border-[color:var(--stroke)] bg-[color:var(--card-strong)] text-sm font-bold md:hidden"
-            onClick={openMobile}
-            aria-label="Open navigation"
-          >
-            ≡
-          </button>
+          <div className="flex items-center gap-3 rounded-xl border border-[color:var(--stroke-soft)] bg-[rgba(0,0,0,0.75)] px-4 py-3 backdrop-blur-xl">
+            <button
+              type="button"
+              className="sticker-pop inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[color:var(--stroke)] bg-[color:var(--card-strong)] text-sm font-bold text-[color:var(--ink)] md:hidden"
+              onClick={openMobile}
+              aria-label="Open navigation"
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                <path d="M2 4h12M2 8h12M2 12h12" />
+              </svg>
+            </button>
 
-          <Link href="/" className="flex items-center gap-2">
-            <span className="grid h-9 w-9 place-items-center rounded-2xl border-2 border-[color:var(--stroke)] bg-[color:var(--accent)] text-white shadow-[var(--shadow-soft)]">
-              <span className="font-display text-lg leading-none">F</span>
-            </span>
-            <span className="font-display text-lg tracking-tight">Fundocs</span>
-          </Link>
+            <Link href="/" className="flex items-center gap-2.5">
+              <span className="grid h-8 w-8 place-items-center rounded-lg bg-[color:var(--accent)] text-white">
+                <span className="font-display text-sm font-bold leading-none">F</span>
+              </span>
+              <span className="font-display text-base font-bold tracking-tight text-[color:var(--ink-strong)]">
+                Fundocs
+              </span>
+            </Link>
 
-          <nav className="hidden items-center gap-2 md:flex" aria-label="Sections">
-            {DOC_SECTIONS.map((s) => (
-              <Link
-                key={s.key}
-                href={`/docs/${s.key}`}
-                className="sticker-pop inline-flex items-center gap-2 rounded-full border-2 border-[color:var(--stroke)] bg-[color:var(--card-strong)] px-3 py-1.5 text-xs font-bold"
-              >
-                <span
-                  className="h-2 w-2 rounded-full border border-[color:var(--stroke)]"
-                  style={{ background: sectionChipColor(s.key) }}
-                  aria-hidden="true"
-                />
-                {s.title}
-              </Link>
-            ))}
-          </nav>
+            <nav className="hidden items-center gap-1.5 md:flex" aria-label="Sections">
+              {DOC_SECTIONS.map((s) => (
+                <Link
+                  key={s.key}
+                  href={`/docs/${s.key}`}
+                  className="sticker-pop inline-flex items-center gap-2 rounded-lg border border-[color:var(--stroke-soft)] bg-[color:var(--card)] px-3 py-1.5 text-xs font-semibold text-[color:var(--muted)] transition-colors hover:text-[color:var(--ink)]"
+                >
+                  <span
+                    className="h-1.5 w-1.5 rounded-full"
+                    style={{ background: sectionChipColor(s.key) }}
+                    aria-hidden="true"
+                  />
+                  {s.title}
+                </Link>
+              ))}
+            </nav>
 
-          <div className="flex-1" />
+            <div className="flex-1" />
 
-          <button
-            type="button"
-            className="sticker-pop hidden items-center gap-3 rounded-full border-2 border-[color:var(--stroke)] bg-[color:var(--card-strong)] px-4 py-2 text-sm text-[color:var(--muted)] md:inline-flex"
-            onClick={openSearch}
-          >
-            <span className="font-bold text-[color:var(--ink)]">Search</span>
-            <span className="rounded-full border border-[color:var(--stroke-soft)] bg-white/70 px-2 py-0.5 text-xs">
-              Cmd K
-            </span>
-          </button>
+            <button
+              type="button"
+              className="sticker-pop hidden items-center gap-3 rounded-lg border border-[color:var(--stroke-soft)] bg-[color:var(--card)] px-3.5 py-2 text-sm text-[color:var(--muted)] md:inline-flex"
+              onClick={openSearch}
+            >
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="opacity-50">
+                <circle cx="7" cy="7" r="5" />
+                <path d="M11 11l3 3" strokeLinecap="round" />
+              </svg>
+              <span className="font-semibold text-[color:var(--ink)]">Search</span>
+              <kbd className="rounded-md border border-[color:var(--stroke-soft)] bg-[color:var(--card-strong)] px-1.5 py-0.5 font-mono text-[10px] text-[color:var(--muted)]">
+                {"\u2318"}K
+              </kbd>
+            </button>
           </div>
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 py-8 sm:px-6 md:grid-cols-[320px_1fr]">
+      {/* ── Layout ── */}
+      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 py-8 sm:px-6 md:grid-cols-[280px_1fr]">
+        {/* ── Sidebar ── */}
         <aside className="hidden md:block">
-          <nav aria-label="Documentation" className="sticker-soft sticky top-[92px] grid gap-5 p-4">
+          <nav aria-label="Documentation" className="sticky top-[92px] grid gap-6 py-2">
             {DOC_SECTIONS.map((s) => (
               <div key={s.key} className="grid gap-2">
-                <div className="flex items-center justify-between">
-                  <p className="font-display text-lg tracking-tight">
+                <div className="flex items-center justify-between px-1">
+                  <p className="font-display text-sm font-bold tracking-tight text-[color:var(--ink-strong)]">
                     {s.title}
                   </p>
                   <span
-                    className="h-2.5 w-2.5 rounded-full"
+                    className="h-2 w-2 rounded-full"
                     style={{ background: sectionColor(s.key) }}
                     aria-hidden="true"
                   />
                 </div>
 
-                <ul className="relative grid gap-1 pl-6">
+                <ul className="relative grid gap-0.5 pl-5">
                   <span
-                    className="route-line pointer-events-none absolute left-[10px] top-2 h-[calc(100%-16px)] w-[2px] opacity-30"
+                    className="route-line pointer-events-none absolute left-[7px] top-1 h-[calc(100%-8px)] w-[1.5px] opacity-40"
                     aria-hidden="true"
                   />
                   {(() => {
@@ -267,23 +275,22 @@ export function DocsShell({ children }: { children: React.ReactNode }) {
                             href={href}
                             aria-current={isActive ? "page" : undefined}
                             className={clsx(
-                              "sticker-pop group flex items-start gap-3 rounded-2xl border px-3 py-2 text-sm transition",
+                              "sticker-pop group flex items-center gap-2.5 rounded-lg px-3 py-1.5 text-[13px] transition-colors",
                               isActive
-                                ? "border-2 border-[color:var(--stroke)] bg-[color:var(--card-strong)] font-bold text-[color:var(--ink)] shadow-[var(--shadow-soft)]"
-                                : "border-[color:var(--stroke-soft)] bg-white/55 text-[color:var(--muted)] hover:bg-white/70 hover:text-[color:var(--ink)]",
-                              opts?.subtle && "opacity-95",
-                              opts?.isIndex && "bg-white/60"
+                                ? "bg-[color:var(--card-strong)] font-semibold text-[color:var(--ink-strong)]"
+                                : "text-[color:var(--muted)] hover:bg-[color:var(--card)] hover:text-[color:var(--ink)]",
+                              opts?.subtle && "opacity-95"
                             )}
                           >
                             <span
                               className={clsx(
-                                "mt-[0.28rem] h-2.5 w-2.5 shrink-0 rounded-full border-2 border-[color:var(--stroke)]",
-                                isActive && "scale-110"
+                                "h-1.5 w-1.5 shrink-0 rounded-full transition-transform",
+                                isActive && "scale-125"
                               )}
-                              style={{ background: marker }}
+                              style={{ background: isActive ? marker : "var(--stroke)" }}
                               aria-hidden="true"
                             />
-                            <span className="min-w-0">{p.title}</span>
+                            <span className="min-w-0 truncate">{p.title}</span>
                           </Link>
                         </li>
                       );
@@ -294,18 +301,18 @@ export function DocsShell({ children }: { children: React.ReactNode }) {
                         {index ? (
                           <>
                             {renderLink(index, { isIndex: true })}
-                            <li className="my-3 border-t border-[color:var(--stroke-soft)]" />
+                            <li className="my-2 ml-3 border-t border-[color:var(--stroke-soft)]" />
                           </>
                         ) : null}
 
                         {ungrouped.map((p) => renderLink(p, { subtle: true }))}
 
                         {groupOrder.map((g) => (
-                          <li key={g} className="mt-2">
-                            <p className="px-3 pb-1 pt-2 text-xs font-bold uppercase tracking-wide text-[color:var(--muted)]">
+                          <li key={g} className="mt-3">
+                            <p className="px-3 pb-1 text-[11px] font-bold uppercase tracking-wider text-[color:var(--muted)]">
                               {g}
                             </p>
-                            <ul className="grid gap-1">
+                            <ul className="grid gap-0.5">
                               {(byGroup.get(g) ?? []).map((p) =>
                                 renderLink(p, { subtle: true })
                               )}
@@ -326,41 +333,42 @@ export function DocsShell({ children }: { children: React.ReactNode }) {
         </main>
       </div>
 
+      {/* ── Mobile nav ── */}
       {mobileOpen ? (
         <div
-          className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm md:hidden"
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm md:hidden"
           role="dialog"
           aria-modal="true"
           aria-labelledby="mobile-nav-title"
           onClick={closeMobile}
         >
           <div
-            className="h-full w-[92%] max-w-[380px] border-r-2 border-[color:var(--stroke)] bg-[color:var(--bg0)] p-5 shadow-[var(--shadow)]"
+            className="h-full w-[88%] max-w-[360px] border-r border-[color:var(--stroke-soft)] bg-[color:var(--bg0)] p-5"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between">
-              <p id="mobile-nav-title" className="font-display text-xl tracking-tight">
+              <p id="mobile-nav-title" className="font-display text-lg font-bold tracking-tight text-[color:var(--ink-strong)]">
                 Navigate
               </p>
               <button
                 type="button"
                 ref={mobileCloseRef}
-                className="sticker-pop rounded-2xl border-2 border-[color:var(--stroke)] bg-[color:var(--card-strong)] px-3 py-2 text-sm font-bold"
+                className="sticker-pop rounded-lg border border-[color:var(--stroke)] bg-[color:var(--card-strong)] px-3 py-1.5 text-sm font-semibold text-[color:var(--ink)]"
                 onClick={closeMobile}
               >
                 Close
               </button>
             </div>
 
-            <div className="mt-4 grid gap-5 overflow-auto pb-10">
+            <div className="mt-5 grid gap-5 overflow-auto pb-10">
               {DOC_SECTIONS.map((s) => (
                 <div key={s.key} className="grid gap-2">
                   <div className="flex items-center justify-between">
-                    <p className="font-display text-lg tracking-tight">
+                    <p className="font-display text-sm font-bold tracking-tight text-[color:var(--ink-strong)]">
                       {s.title}
                     </p>
                     <span
-                      className="h-2.5 w-2.5 rounded-full"
+                      className="h-2 w-2 rounded-full"
                       style={{ background: sectionColor(s.key) }}
                       aria-hidden="true"
                     />
@@ -371,11 +379,11 @@ export function DocsShell({ children }: { children: React.ReactNode }) {
                         <Link
                           href={pageHref(p)}
                           aria-current={active === pageHref(p) ? "page" : undefined}
-                          className="sticker-pop block rounded-2xl border-2 border-[color:var(--stroke)] bg-white/60 px-3 py-2 text-sm"
+                          className="sticker-pop block rounded-lg border border-[color:var(--stroke-soft)] bg-[color:var(--card)] px-3 py-2.5 text-sm"
                           onClick={closeMobile}
                         >
-                          <span className="block font-bold">{p.title}</span>
-                          <span className="block text-[color:var(--muted)]">
+                          <span className="block font-semibold text-[color:var(--ink)]">{p.title}</span>
+                          <span className="mt-0.5 block text-xs text-[color:var(--muted)]">
                             {p.description}
                           </span>
                         </Link>
@@ -389,25 +397,26 @@ export function DocsShell({ children }: { children: React.ReactNode }) {
         </div>
       ) : null}
 
+      {/* ── Search modal ── */}
       {searchOpen ? (
         <div
-          className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm"
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
           role="dialog"
           aria-modal="true"
           aria-labelledby="search-title"
           onClick={closeSearch}
         >
           <div
-            className="mx-auto mt-16 w-[92%] max-w-2xl rounded-[calc(var(--radius)+12px)] border-2 border-[color:var(--stroke)] bg-[color:var(--bg0)] p-5 shadow-[var(--shadow)]"
+            className="mx-auto mt-16 w-[92%] max-w-2xl rounded-xl border border-[color:var(--stroke)] bg-[color:var(--bg1)] p-5 shadow-[var(--shadow-hover)]"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between gap-3">
-              <p id="search-title" className="font-display text-xl tracking-tight">
+              <p id="search-title" className="font-display text-lg font-bold tracking-tight text-[color:var(--ink-strong)]">
                 Search
               </p>
               <button
                 type="button"
-                className="sticker-pop rounded-2xl border-2 border-[color:var(--stroke)] bg-[color:var(--card-strong)] px-3 py-2 text-sm font-bold"
+                className="sticker-pop rounded-lg border border-[color:var(--stroke)] bg-[color:var(--card-strong)] px-3 py-1.5 text-sm font-semibold text-[color:var(--ink)]"
                 onClick={closeSearch}
               >
                 Close
@@ -419,8 +428,8 @@ export function DocsShell({ children }: { children: React.ReactNode }) {
                 ref={searchInputRef}
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
-                placeholder="Try: tools, agent builder, structured output…"
-                className="w-full rounded-2xl border-2 border-[color:var(--stroke)] bg-white/80 px-4 py-3 text-sm outline-none"
+                placeholder="Try: tools, agent builder, structured output..."
+                className="w-full rounded-lg border border-[color:var(--stroke)] bg-[color:var(--card)] px-4 py-3 text-sm text-[color:var(--ink)] outline-none placeholder:text-[color:var(--muted)]"
                 onKeyDown={(e) => {
                   if (e.key === "ArrowDown") {
                     e.preventDefault();
@@ -438,29 +447,29 @@ export function DocsShell({ children }: { children: React.ReactNode }) {
                   }
                 }}
               />
-              <div className="mt-4 grid gap-2">
+              <div className="mt-3 grid gap-1.5 max-h-[50vh] overflow-y-auto">
                 {results.map((p, idx) => (
                   <Link
                     key={p.slug}
                     href={pageHref(p)}
                     className={clsx(
-                      "sticker-pop rounded-2xl border-2 bg-white/70 px-4 py-3",
+                      "sticker-pop rounded-lg px-4 py-3 transition-colors",
                       idx === activeIndex
-                        ? "border-[color:var(--stroke)]"
-                        : "border-[color:var(--stroke-soft)]"
+                        ? "bg-[color:var(--card-strong)] border border-[color:var(--accent)]/20"
+                        : "border border-transparent hover:bg-[color:var(--card)]"
                     )}
                     onClick={() => {
                       closeSearch();
                     }}
                   >
-                    <p className="text-sm font-bold">{p.title}</p>
-                    <p className="text-sm text-[color:var(--muted)]">
+                    <p className="text-sm font-semibold text-[color:var(--ink)]">{p.title}</p>
+                    <p className="mt-0.5 text-xs text-[color:var(--muted)]">
                       {p.description}
                     </p>
                   </Link>
                 ))}
                 {results.length === 0 ? (
-                  <p className="text-sm text-[color:var(--muted)]">
+                  <p className="px-4 py-3 text-sm text-[color:var(--muted)]">
                     No matches. Try fewer words.
                   </p>
                 ) : null}

@@ -53,7 +53,7 @@ function DoorMeter({ count, max = 6 }: { count: number; max?: number }) {
     <svg
       aria-hidden="true"
       viewBox="0 0 120 22"
-      className="h-6 w-[120px]"
+      className="h-5 w-[100px]"
     >
       {Array.from({ length: max }).map((_, i) => (
         <rect
@@ -62,11 +62,11 @@ function DoorMeter({ count, max = 6 }: { count: number; max?: number }) {
           y={5}
           width={12}
           height={12}
-          rx={4}
-          fill={i < c ? "var(--ink)" : "transparent"}
-          stroke="var(--ink)"
-          strokeWidth={2}
-          opacity={i < c ? 1 : 0.28}
+          rx={3}
+          fill={i < c ? "var(--accent)" : "transparent"}
+          stroke={i < c ? "var(--accent)" : "var(--stroke)"}
+          strokeWidth={1.5}
+          opacity={i < c ? 1 : 0.4}
         />
       ))}
     </svg>
@@ -126,39 +126,39 @@ export function ToolPicker() {
     <div className="my-6 sticker-soft p-5">
       <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
         <div className="flex flex-col gap-1">
-        <p className="font-display text-xl tracking-tight">
-          Pick the tools you actually need
-        </p>
-        <p className="text-sm text-[color:var(--muted)]">
-          Start small. Add power only when you have a real reason.
-        </p>
+          <p className="font-display text-lg font-bold tracking-tight text-[color:var(--ink-strong)]">
+            Pick the tools you actually need
+          </p>
+          <p className="text-sm text-[color:var(--muted)]">
+            Start small. Add power only when you have a real reason.
+          </p>
         </div>
         <button
           type="button"
-          className="sticker-pop w-fit rounded-full border-2 border-[color:var(--stroke)] bg-[color:var(--card-strong)] px-4 py-2 text-xs font-bold"
+          className="sticker-pop w-fit rounded-lg border border-[color:var(--stroke-soft)] bg-[color:var(--card)] px-3.5 py-1.5 text-xs font-semibold text-[color:var(--muted)]"
           onClick={() => setPicked({ ...initialPicked })}
         >
           Minimal preset
         </button>
       </div>
 
-      <div className="mt-4 grid gap-4 md:grid-cols-[1fr_1fr]">
+      <div className="mt-5 grid gap-4 md:grid-cols-[1fr_1fr]">
         <div className="grid gap-2">
           {NEEDS.map((n) => (
             <label
               key={n.id}
-              className="sticker-pop flex cursor-pointer items-start gap-3 rounded-2xl border-2 border-[color:var(--stroke)] bg-white/70 px-4 py-3"
+              className="sticker-pop flex cursor-pointer items-start gap-3 rounded-lg border border-[color:var(--stroke-soft)] bg-[color:var(--card)] px-4 py-3"
             >
               <input
                 type="checkbox"
-                className="mt-1"
+                className="mt-1 accent-[color:var(--accent)]"
                 checked={picked[n.id]}
                 onChange={(e) =>
                   setPicked((p) => ({ ...p, [n.id]: e.target.checked }))
                 }
               />
               <span className="min-w-0">
-                <span className="block text-sm font-bold">{n.label}</span>
+                <span className="block text-sm font-semibold text-[color:var(--ink)]">{n.label}</span>
                 <span className="block text-sm text-[color:var(--muted)]">
                   {n.help}
                 </span>
@@ -169,12 +169,12 @@ export function ToolPicker() {
 
         <div className="sticker p-4">
           <div className="flex items-center justify-between gap-3">
-            <p className="text-sm font-bold text-[color:var(--muted)]">
+            <p className="text-xs font-bold uppercase tracking-wider text-[color:var(--muted)]">
               Tool belt
             </p>
             <div className="flex items-center gap-2">
-              <span className="rounded-full border-2 border-[color:var(--stroke)] bg-white/70 px-2 py-0.5 text-xs font-bold text-[color:var(--muted)]">
-                Doors opened: {chosen.length}
+              <span className="rounded-md border border-[color:var(--stroke-soft)] bg-[color:var(--card)] px-2 py-0.5 text-xs font-semibold text-[color:var(--muted)]">
+                {chosen.length} active
               </span>
               <DoorMeter count={chosen.length} />
             </div>
@@ -189,10 +189,10 @@ export function ToolPicker() {
               {chosen.map((t) => (
                 <span
                   key={t}
-                  className="inline-flex items-center gap-2 rounded-full border-2 border-[color:var(--stroke)] bg-white/70 px-3 py-1 text-xs font-bold"
+                  className="inline-flex items-center gap-2 rounded-md border border-[color:var(--stroke-soft)] bg-[color:var(--card)] px-2.5 py-1 text-xs font-semibold text-[color:var(--ink)]"
                 >
                   <span
-                    className="h-2 w-2 rounded-full border border-[color:var(--stroke)]"
+                    className="h-1.5 w-1.5 rounded-full"
                     style={{ background: toolColor(t) }}
                     aria-hidden="true"
                   />
@@ -203,7 +203,7 @@ export function ToolPicker() {
           )}
 
           <div className="mt-4">
-            <p className="text-xs font-bold uppercase tracking-wide text-[color:var(--muted)]">
+            <p className="text-[11px] font-bold uppercase tracking-wider text-[color:var(--muted)]">
               Guardrails to consider
             </p>
             {guardrails.length === 0 ? (
@@ -211,11 +211,11 @@ export function ToolPicker() {
                 Keep it simple. You may not need any tools for this use case.
               </p>
             ) : (
-              <div className="mt-2 flex flex-wrap gap-2">
+              <div className="mt-2 flex flex-wrap gap-1.5">
                 {guardrails.map((g) => (
                   <span
                     key={g}
-                    className="inline-flex items-center rounded-full border-2 border-[color:var(--stroke)] bg-[color:var(--card-strong)] px-3 py-1 text-xs font-bold text-[color:var(--muted)]"
+                    className="inline-flex items-center rounded-md border border-[color:var(--stroke-soft)] bg-[color:var(--card-strong)] px-2.5 py-1 text-xs font-semibold text-[color:var(--muted)]"
                   >
                     {g}
                   </span>
@@ -227,7 +227,7 @@ export function ToolPicker() {
           <div className="mt-4 flex flex-wrap gap-2">
             <button
               type="button"
-              className="sticker-pop rounded-full border-2 border-[color:var(--stroke)] bg-white/75 px-4 py-2 text-xs font-bold"
+              className="sticker-pop rounded-lg border border-[color:var(--stroke)] bg-[color:var(--card-strong)] px-3.5 py-1.5 text-xs font-semibold text-[color:var(--ink)]"
               onClick={async () => {
                 const manifest = [
                   "Tools:",
@@ -248,7 +248,7 @@ export function ToolPicker() {
           </div>
 
           <p className="mt-3 text-xs text-[color:var(--muted)]">
-            Reminder: every tool is a door. More doors means more safety work.
+            Every tool is a door. More doors means more safety work.
           </p>
         </div>
       </div>

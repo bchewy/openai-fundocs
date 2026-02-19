@@ -82,22 +82,24 @@ export function AgentBriefBuilder() {
 
   return (
     <div className="my-6 sticker-soft p-5">
-      <p className="font-display text-xl tracking-tight">Make an agent brief</p>
+      <p className="font-display text-lg font-bold tracking-tight text-[color:var(--ink-strong)]">
+        Make an agent brief
+      </p>
       <p className="mt-1 text-sm text-[color:var(--muted)]">
-        A one-page “how to behave” note that both humans and machines can follow.
+        A one-page &ldquo;how to behave&rdquo; note that both humans and machines can follow.
       </p>
 
-      <div className="mt-4 grid gap-4 md:grid-cols-[1fr_1fr]">
+      <div className="mt-5 grid gap-4 md:grid-cols-[1fr_1fr]">
         <div className="grid gap-3">
           <fieldset className="grid gap-2">
-            <legend className="text-sm font-bold">Role</legend>
+            <legend className="text-sm font-semibold text-[color:var(--ink)]">Role</legend>
             <div className="grid gap-2 sm:grid-cols-2">
               {ROLES.map((r) => {
                 const active = role === r.id;
                 return (
                   <label
                     key={r.id}
-                    className="sticker-pop cursor-pointer rounded-[calc(var(--radius)+10px)] border-2 border-[color:var(--stroke)] bg-white/70 p-4"
+                    className="sticker-pop cursor-pointer rounded-lg border border-[color:var(--stroke-soft)] bg-[color:var(--card)] p-3.5"
                   >
                     <input
                       type="radio"
@@ -109,17 +111,18 @@ export function AgentBriefBuilder() {
                     />
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <p className="text-sm font-bold text-[color:var(--ink)]">
+                        <p className="text-sm font-semibold text-[color:var(--ink)]">
                           {r.label}
                         </p>
-                        <p className="mt-1 text-sm text-[color:var(--muted)]">
+                        <p className="mt-1 text-xs text-[color:var(--muted)]">
                           {r.promise}
                         </p>
                       </div>
                       <span
-                        className="mt-1 h-3 w-3 shrink-0 rounded-full border-2 border-[color:var(--stroke)]"
+                        className="mt-0.5 h-3 w-3 shrink-0 rounded-full border-2"
                         style={{
-                          background: active ? "var(--accent2)" : "transparent",
+                          borderColor: active ? "var(--accent)" : "var(--stroke)",
+                          background: active ? "var(--accent)" : "transparent",
                         }}
                         aria-hidden="true"
                       />
@@ -131,39 +134,42 @@ export function AgentBriefBuilder() {
           </fieldset>
 
           <label className="grid gap-1">
-            <span className="text-sm font-bold">Goal</span>
+            <span className="text-sm font-semibold text-[color:var(--ink)]">Goal</span>
             <input
-              className="rounded-2xl border-2 border-[color:var(--stroke)] bg-white/80 px-4 py-3 text-sm"
+              className="rounded-lg border border-[color:var(--stroke)] bg-[color:var(--card)] px-4 py-2.5 text-sm text-[color:var(--ink)] outline-none placeholder:text-[color:var(--muted)]"
               value={goal}
               onChange={(e) => setGoal(e.target.value)}
             />
           </label>
 
           <label className="grid gap-1">
-            <span className="text-sm font-bold">Tone</span>
+            <span className="text-sm font-semibold text-[color:var(--ink)]">Tone</span>
             <input
-              className="rounded-2xl border-2 border-[color:var(--stroke)] bg-white/80 px-4 py-3 text-sm"
+              className="rounded-lg border border-[color:var(--stroke)] bg-[color:var(--card)] px-4 py-2.5 text-sm text-[color:var(--ink)] outline-none placeholder:text-[color:var(--muted)]"
               value={tone}
               onChange={(e) => setTone(e.target.value)}
             />
           </label>
 
           <div className="grid gap-2">
-            <span className="text-sm font-bold">Safety</span>
+            <span className="text-sm font-semibold text-[color:var(--ink)]">Safety</span>
             {SAFETY.map((s) => (
               <label
                 key={s.id}
-                className="sticker-pop flex cursor-pointer items-center gap-3 rounded-2xl border-2 border-[color:var(--stroke)] bg-white/70 px-4 py-3 text-sm"
+                className="sticker-pop flex cursor-pointer items-center gap-3 rounded-lg border border-[color:var(--stroke-soft)] bg-[color:var(--card)] px-4 py-2.5 text-sm"
               >
                 <input
                   type="checkbox"
+                  className="accent-[color:var(--accent)]"
                   checked={Boolean(safety[s.id])}
                   onChange={(e) =>
                     setSafety((p) => ({ ...p, [s.id]: e.target.checked }))
                   }
                 />
                 <span className="min-w-0">
-                  <span className="block text-sm font-bold">{s.stamp}</span>
+                  <span className="block text-xs font-bold uppercase tracking-wider text-[color:var(--accent3)]">
+                    {s.stamp}
+                  </span>
                   <span className="block text-sm text-[color:var(--muted)]">
                     {s.label}
                   </span>
@@ -175,13 +181,13 @@ export function AgentBriefBuilder() {
 
         <div className="sticker p-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="text-sm font-bold text-[color:var(--muted)]">
+            <p className="text-xs font-bold uppercase tracking-wider text-[color:var(--muted)]">
               Brief preview
             </p>
             <div className="flex flex-wrap items-center gap-2">
               <button
                 type="button"
-                className="sticker-pop rounded-full border-2 border-[color:var(--stroke)] bg-white/75 px-4 py-2 text-xs font-bold"
+                className="sticker-pop rounded-lg border border-[color:var(--stroke)] bg-[color:var(--card-strong)] px-3.5 py-1.5 text-xs font-semibold text-[color:var(--ink)]"
                 onClick={async () => {
                   try {
                     await navigator.clipboard.writeText(brief);
@@ -194,7 +200,7 @@ export function AgentBriefBuilder() {
               </button>
               <button
                 type="button"
-                className="sticker-pop rounded-full border-2 border-[color:var(--stroke)] bg-[color:var(--card-strong)] px-4 py-2 text-xs font-bold"
+                className="sticker-pop rounded-lg border border-[color:var(--stroke-soft)] bg-[color:var(--card)] px-3.5 py-1.5 text-xs font-semibold text-[color:var(--muted)]"
                 onClick={async () => {
                   try {
                     await navigator.clipboard.writeText(briefMd);
@@ -209,24 +215,23 @@ export function AgentBriefBuilder() {
           </div>
 
           {goalLooksVague ? (
-            <p className="mt-3 text-sm font-bold text-[color:var(--muted)]">
+            <p className="mt-3 text-sm font-semibold text-[#f59e0b]">
               Quick check: your goal is a bit vague. Narrow it to one job if you can.
             </p>
           ) : null}
 
           <div className="mt-4 flex flex-wrap gap-2">
-            {selectedSafety.map((s, i) => (
+            {selectedSafety.map((s) => (
               <span
                 key={s.id}
-                className="inline-flex items-center rounded-full border-2 border-[color:var(--stroke)] bg-[color:var(--accent3)] px-3 py-1 text-xs font-bold text-[color:var(--ink)]"
-                style={{ transform: `rotate(${i % 2 === 0 ? -2 : 2}deg)` }}
+                className="inline-flex items-center rounded-md border border-[color:var(--accent3)]/30 bg-[color:var(--accent3)]/10 px-2.5 py-1 text-xs font-bold text-[color:var(--accent3)]"
               >
                 {s.stamp}
               </span>
             ))}
           </div>
 
-          <pre className="mt-3 whitespace-pre-wrap text-sm leading-6">
+          <pre className="mt-3 whitespace-pre-wrap rounded-lg border border-[color:var(--stroke-soft)] bg-[color:var(--card)] p-3 text-sm leading-6 text-[color:var(--ink)]">
             <code>{brief}</code>
           </pre>
           <p className="mt-3 text-xs text-[color:var(--muted)]">
